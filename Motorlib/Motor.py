@@ -14,7 +14,7 @@ class RunMode:
 
 
 class Motor:
-    def __init__(self, type: MotorType, pwm_a: int, pwm_b, enc_a: int, enc_b: int, runMode=RunMode.VELOCITY_CONTROL):
+    def __init__(self, type, pwm_a: int, pwm_b, enc_a: int, enc_b: int, runMode=RunMode.VELOCITY_CONTROL):
         self.type = type
         self.__encoder = BaseEncoder(enc_a, enc_b)
         self.runMode = runMode
@@ -50,7 +50,6 @@ class Motor:
             pass
         self.set_power(self.__current_power)
 
-
     """
     Get and set methods to determine what the motor's current position and velocity is at
     """
@@ -83,6 +82,9 @@ class Motor:
     """
 
     def __make_pulse(self, power) -> int:
+        if not (-1 <= power <= 1):
+            raise ValueError("Power driven cannot be outside of the -1 to 1 range!")
+
         if power > 0:
             abs(power)
             return 990 * power + 1490
