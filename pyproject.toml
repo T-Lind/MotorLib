@@ -1,0 +1,18 @@
+[project]
+name = "pymotorlib"
+version = "0.3"
+authors = [
+  { name="Tiernan Lindauer", email="tiernanxkl@gmail.com" },
+]
+description = "A package to run 12V DC Motors on the Raspberry Pi"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/T-Lind/MotorLib"
+"Bug Tracker" = "https://github.com/T-Lind/MotorLib/issues"
