@@ -4,7 +4,7 @@ from RPi.GPIO import GPIO
 
 from Motorlib import PIDController
 from Motorlib.BaseEncoder import BaseEncoder
-from Motorlib.MotorType import MotorType
+from Motorlib.PWMDriver import PWMDriver
 
 
 class RunMode:
@@ -14,12 +14,17 @@ class RunMode:
 
 
 class Motor:
-    def __init__(self, type, pwm_a: int, pwm_b, enc_a: int, enc_b: int, runMode=RunMode.VELOCITY_CONTROL):
+    FREQ = 400
+    MIN_PULSE, MAX_PULSE = 1050, 1950
+
+    def __init__(self, type, pwm_a: int, enc_a: int, enc_b: int, driver: PWMDriver, runMode=RunMode.VELOCITY_CONTROL):
         self.type = type
+        self.__driver = driver
         self.__encoder = BaseEncoder(enc_a, enc_b)
         self.runMode = runMode
 
-        self.__pwm = GPIO.PWM(pwm_a, pwm_b)
+        self.__pwm = GPIO.PWM(pwm_a, Motor.FREQ)
+        self.__pwm.start(0)
 
         self.__prev_time = None
         self.__prev_pos = None
@@ -72,26 +77,14 @@ class Motor:
 
     def set_power(self, power=None) -> None:
         power = self.__current_power if power is None else power
-        self.__pwm.ChangeDutyCycle(self.__duty_cycle(self.__make_pulse(power)))
+        self.__pwm.ChangeDutyCycle(self.__duty_cycle(self.__driver.make_pulse(power)))
 
     def stop(self) -> None:
         self.__pwm.ChangeDutyCycle(0)
 
     """
-    Private methods to convert power to a duty cycle
+    Private method to convert a pulse width to a duty cycle
     """
 
-    def __make_pulse(self, power) -> int:
-        if not (-1 <= power <= 1):
-            raise ValueError("Power driven cannot be outside of the -1 to 1 range!")
-
-        if power > 0:
-            abs(power)
-            return 990 * power + 1490
-        elif power < 0:
-            return 990 * power + 1510
-        else:
-            return 1500
-
     def __duty_cycle(self, pulse_width) -> float:
-        return pulse_width / 1E6 * 400 * 100
+        return pulse_width / 1E4 * Motor.FREQ
