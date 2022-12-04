@@ -1,4 +1,4 @@
-# <u>MotorLib: A configurable library for 12V DC Motors</u>
+# MotorLib: A configurable library for 12V DC Motors
 ### Author: Tiernan Lindauer
 
 MotorLib is for use with any microcontroller/computer that has GPIO, like the popular Raspberry Pi or Arduino boards.
