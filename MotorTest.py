@@ -2,7 +2,7 @@ import math
 from time import time
 
 from Motorlib import Motor, MotorType, RunMode
-from Motorlib.PWMDriver import GoBildaControl
+from Motorlib import GoBildaControl
 
 # Time to run the motor, in seconds
 RUN_TIME = 10
@@ -15,7 +15,7 @@ pwm = 12
 encoder = (11, 12)
 
 # Establish a motor object for a gobilda 312 RPM motor, with the specified pwm and encoder ports and position type control
-my_motor = Motor(MotorType.GOBILDA_312, pwm, *encoder, GoBildaControl, RunMode.POSITION_CONTROL)
+my_motor = Motor(MotorType.GOBILDA_312, pwm, *encoder, GoBildaControl, runMode=RunMode.POSITION_CONTROL)
 
 # Set PID for the motor
 my_motor.set_pid_coefficients(kP=0.001)
