@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='',
+    name='MotorLib',
     version='0.1',
     license='MIT',
     author="Tiernan Lindauer",
