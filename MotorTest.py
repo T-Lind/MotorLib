@@ -1,8 +1,8 @@
 import math
 from time import time
 
-from Motorlib import Motor, MotorType, RunMode
-from Motorlib import GoBildaControl
+from pymotorlib import Motor, MotorType, RunMode
+from pymotorlib import GoBildaControl
 
 # Time to run the motor, in seconds
 RUN_TIME = 10

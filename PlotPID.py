@@ -3,7 +3,7 @@ import random
 
 import matplotlib.pyplot as plt
 
-from Motorlib import PIDController
+from pymotorlib import PIDController
 
 SIM_TIME = 10
 RESOLUTION = 0.01

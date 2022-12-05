@@ -2,9 +2,9 @@ from time import time
 
 from RPi.GPIO import GPIO
 
-from Motorlib import PIDController
-from Motorlib.BaseEncoder import BaseEncoder
-from Motorlib.PWMDriver import PWMDriver
+from pymotorlib import PIDController
+from pymotorlib.BaseEncoder import BaseEncoder
+from pymotorlib.PWMDriver import PWMDriver
 
 
 class RunMode:

@@ -1,6 +1,6 @@
 [project]
 name = "pymotorlib"
-version = "0.3"
+version = "0.6"
 authors = [
   { name="Tiernan Lindauer", email="tiernanxkl@gmail.com" },
 ]
